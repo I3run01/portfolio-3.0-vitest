@@ -8,7 +8,6 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "jest"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
@@ -16,7 +15,6 @@
     "i18next": "^23.11.1",
     "i18next-browser-languagedetector": "^7.2.1",
     "i18next-xhr-backend": "^3.2.2",
-    "jest-environment-jsdom": "^29.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^14.1.0",
@@ -26,9 +24,6 @@
     "redux": "^5.0.1"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.4.5",
-    "@testing-library/react": "^14.2.2",
-    "@testing-library/user-event": "^14.5.2",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@types/react-redux": "^7.1.33",
