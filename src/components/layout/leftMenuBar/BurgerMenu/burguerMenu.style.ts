@@ -30,8 +30,10 @@ export const BurguerMenuStyled = styled.div<Props>`
     }
     
     .line01, .line02, .line03 {
+        rotate: 0deg;
 
         height: 4px;
+
         transition: all 0.5s ease-in-out;
         
         border: 1px solid ${props => props.$fontColor};
