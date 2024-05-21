@@ -46,6 +46,17 @@ export const Fonts = {
     color: ${props => props.$fontColor};
 
     @media screen and (max-width: ${maxMobileWidthString}){
+      font-size: 18px;
+    }
+  `,
+
+  Title04: styled.h3<Props>`
+    font-family: 'Dosis', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: ${props => props.$fontColor};
+
+    @media screen and (max-width: ${maxMobileWidthString}){
       font-size: 16px;
     }
   `,

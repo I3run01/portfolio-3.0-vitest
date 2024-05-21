@@ -1,5 +1,6 @@
 import { Cape } from "./cape"
 import { About } from "./about"
+import { Skills } from "./skills"
  
 const Home = () => {
 
@@ -7,6 +8,7 @@ const Home = () => {
         <>
             <Cape />
             <About />
+            <Skills/>
         </>
     ) 
 }
