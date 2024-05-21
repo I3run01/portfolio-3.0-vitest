@@ -6,7 +6,6 @@ type props = {
 }
 
 export const AboutDiv = styled.div<props>`
-    height: 100vh;
     
     .flexBox {
         

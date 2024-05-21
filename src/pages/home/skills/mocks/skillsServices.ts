@@ -1,5 +1,3 @@
-const photo = 'src/assets/photos/aboutPhoto.png';
-
 export class SkillsService {
     async getSkills() {
         const skillsData = [
@@ -38,15 +36,15 @@ export class SkillsService {
         const projectsData = [
             {
                 title: 'bot bitcoin',
-                photo: 'src\assets\projectCape\bot bitcoin.png',
+                photo: 'src/assets/projectCape/bot bitcoin.png',
             },
             {
                 title: 'first portfolio',
-                photo: 'src\assets\projectCape\first portfolio.png',
+                photo: 'src/assets/projectCape/first portfolio.png',
             },
             {
                 title: 'mercado vizinhanca site',
-                photo: 'src\assets\projectCape\mercado vizinhanca site.png',
+                photo: 'src/assets/projectCape/mercado vizinhanca site.png',
             },
         ];
 

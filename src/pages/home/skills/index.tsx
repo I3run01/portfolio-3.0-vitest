@@ -5,25 +5,63 @@ import { Container } from 'src/components/container';
 import { useQuery } from 'react-query';
 import { SkillsService } from "./mocks/skillsServices";
 import { SkillsDiv } from './skills.styled';
+import { useState } from 'react';
 
 type getSkillsType = {
-    category: string
-    skills: string[]
+    category: string;
+    skills: string[];
+}
+
+type getProjectsBySkillType = {
+    title: string;
+    photo: string;
 }
 
 export const Skills = () => {
+    const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
+
     const isDark = useSelector((state: RootState) => state.theme.isDark);
     const FONT_COLOR = isDark ? Colors.darkFontColor : Colors.lightFontColor;
     const SKILLS_CONTAINER_BG_COLOR = isDark ? Colors.darkBgColor02 : Colors.lightBgColor02;
 
-    const { data } = useQuery(['getSkillsService'], async () => {
-        const response = await new SkillsService().getSkills();
-        return JSON.parse(response);
-    });
+    const { data: skillsData, isLoading: isSkillsLoading, isError: isSkillsError } = useQuery(
+        'getSkills',
+        async () => {
+            const response = await new SkillsService().getSkills();
+            const json: getSkillsType[] =  JSON.parse(response);
+            setSelectedSkill(json[0].skills[0])
+
+            return json
+        }
+    );
+
+    const { data: projectsData, refetch: refetchProjects } = useQuery(
+        ['getProjectsBySkill', selectedSkill],
+        async () => {
+            if (selectedSkill) {
+                const response = await new SkillsService().getProjectsBySkill(selectedSkill);
+                return JSON.parse(response);
+            }
+            return [];
+        },
+        { enabled: !!selectedSkill }
+    );
+
+    const changeRouteBlank = (route: string) => {
+        window.open(route, '_blank');
+    };
+
+    if (isSkillsLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (isSkillsError) {
+        return <div>Error loading skills</div>;
+    }
 
     return (
         <Container>
-            <SkillsDiv 
+            <SkillsDiv
                 $borderColor={FONT_COLOR}
                 $skillsContainerBgColor={SKILLS_CONTAINER_BG_COLOR}>
                 <Fonts.Title02 $fontColor={FONT_COLOR}>
@@ -31,8 +69,8 @@ export const Skills = () => {
                 </Fonts.Title02>
 
                 <div className="container">
-                    <div>
-                        {data && data.map((skillData: getSkillsType, index: number) => (
+                    <div className="skills">
+                        {skillsData && skillsData.map((skillData: getSkillsType, index: number) => (
                             <div key={index} className="skillContainer">
                                 <Fonts.Title04 $fontColor={FONT_COLOR}>
                                     {skillData.category}
@@ -41,7 +79,13 @@ export const Skills = () => {
                                 <ul className="skillList">
                                     {skillData.skills.map((skill, skillIndex) => (
                                         <div key={skillIndex}>
-                                            <Fonts.Paragraph $fontColor={FONT_COLOR}>
+                                            <Fonts.Paragraph
+                                                $fontColor={FONT_COLOR}
+                                                className={skill === selectedSkill ? 'selectedSkill' : 'notSelectedSkill'}
+                                                onClick={() => {
+                                                    setSelectedSkill(skill);
+                                                    refetchProjects();
+                                                }}>
                                                 {skill} <b>|</b>
                                             </Fonts.Paragraph>
                                         </div>
@@ -52,10 +96,13 @@ export const Skills = () => {
                     </div>
 
                     <div className="projects">
-                        
+                        {projectsData && projectsData.map((project: getProjectsBySkillType , index: number) => (
+                            <div key={index} onClick={() => changeRouteBlank(`project/${project.title}`)}>
+                                <img src={project.photo} alt="" />
+                            </div>
+                        ))}
                     </div>
                 </div>
-
             </SkillsDiv>
         </Container>
     );
