@@ -15,15 +15,15 @@ describe('<About />', () => {
   });
 
   it('should have flex-direction: row', () => {
-    expect(flexBox).toHaveStyle('background-color: rgb(0, 0, 255)');;
+    expect(flexBox).toHaveStyle('flex-direction: row');;
   });
 
-  //TODO: check this test
+  //TODO: find out why this test does not works
   // it('should have the flex-box like column', async () => {
   //   global.innerWidth = 400;
   //   fireEvent(window, new Event('resize'));
 
-  //   expect(flexBox).toHaveStyle('background-color: rgb(0, 0, 255)');
+  //   expect(flexBox).toHaveStyle('flex-direction: column');
   // });
 
 });

@@ -58,25 +58,28 @@ export const Skills = () => {
     if (isSkillsError) {
         return <div>Error loading skills</div>;
     }
+    
 
     return (
         <Container>
             <SkillsDiv
                 $borderColor={FONT_COLOR}
-                $skillsContainerBgColor={SKILLS_CONTAINER_BG_COLOR}>
+                $skillsContainerBgColor={SKILLS_CONTAINER_BG_COLOR}
+                $fontColor={FONT_COLOR}>
                 <Fonts.Title02 $fontColor={FONT_COLOR}>
                     Skills
                 </Fonts.Title02>
 
-                <div className="container">
-                    <div className="skills">
+                <div className="container" data-testid = 'container'>
+
+                    <div className="skills" data-testid = 'skills'>
                         {skillsData && skillsData.map((skillData: getSkillsType, index: number) => (
                             <div key={index} className="skillContainer">
                                 <Fonts.Title04 $fontColor={FONT_COLOR}>
                                     {skillData.category}
                                 </Fonts.Title04>
 
-                                <ul className="skillList">
+                                <ul className="skillList" data-testid = 'skillList'>
                                     {skillData.skills.map((skill, skillIndex) => (
                                         <div key={skillIndex}>
                                             <Fonts.Paragraph
@@ -95,10 +98,10 @@ export const Skills = () => {
                         ))}
                     </div>
 
-                    <div className="projects">
+                    <div className="projects" data-testid = 'projects'>
                         {projectsData && projectsData.map((project: getProjectsBySkillType , index: number) => (
                             <div key={index} onClick={() => changeRouteBlank(`project/${project.title}`)}>
-                                <img src={project.photo} alt="" />
+                                <img src={project.photo} alt={project.title} data-testid = 'projectCapePhoto'/>
                             </div>
                         ))}
                     </div>

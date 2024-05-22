@@ -4,7 +4,10 @@ import { Colors } from "src/styles/globalVariables.style";
 type props = {
     $borderColor: string
     $skillsContainerBgColor: string
+    $fontColor: string
 }
+
+const mobileScreen = '800px'
 
 export const SkillsDiv = styled.div<props>`
     margin-top: 10px;
@@ -43,6 +46,10 @@ export const SkillsDiv = styled.div<props>`
     
                     .selectedSkill {
                         color: ${Colors.themeColor02};
+
+                        @media screen and (max-width: ${mobileScreen}) {
+                            color: ${props => props.$fontColor};
+                        }
                     }
         
                     p {
@@ -55,8 +62,12 @@ export const SkillsDiv = styled.div<props>`
                         &:hover {
                             color: ${Colors.themeColor01};
                             cursor: pointer;
-                        }
 
+                            @media screen and (max-width: ${mobileScreen}) {
+                                color: ${props => props.$fontColor};
+                                cursor: default;
+                            }
+                        }
                         
                     }
                 }
@@ -101,8 +112,8 @@ export const SkillsDiv = styled.div<props>`
                     }
                 }
             }
-
-            @media screen and (max-width: 800px) {
+             
+            @media screen and (max-width: ${mobileScreen}) {
                 display: none;
             }
         }
